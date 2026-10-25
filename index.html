@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acme Cloud — Sign in</title>
+  <meta name="description" content="Email authentication with Supabase — sign in, sign up, or use a magic link." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= AUTH VIEW ================= -->
+  <main class="shell" id="auth-view">
+    <section class="hero">
+      <div class="brand"><span class="brand-dot"></span> Acme Cloud</div>
+      <h1>One login for your whole workspace.</h1>
+      <p>
+        A live, serverless starter with email authentication, a protected
+        dashboard and a real Postgres database — powered by Supabase.
+      </p>
+      <ul>
+        <li><span class="check">&#10003;</span> Email &amp; password sign-up with verification</li>
+        <li><span class="check">&#10003;</span> Passwordless magic-link login</li>
+        <li><span class="check">&#10003;</span> Sessions that survive a page refresh</li>
+        <li><span class="check">&#10003;</span> Row-level security on every table</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="card">
+        <h2 id="card-title">Sign in</h2>
+        <p class="sub" id="card-sub">Use your email to continue to your dashboard.</p>
+
+        <div class="tabs" role="tablist">
+          <button type="button" id="tab-signin" class="active">Sign in</button>
+          <button type="button" id="tab-signup">Sign up</button>
+        </div>
+
+        <div id="alert" class="msg" hidden></div>
+
+        <form id="auth-form" autocomplete="on">
+          <label class="field" id="name-field" hidden>
+            <span>Full name</span>
+            <input type="text" id="full-name" autocomplete="name" placeholder="Ada Lovelace" />
+          </label>
+
+          <label class="field">
+            <span>Email</span>
+            <input type="email" id="email" required autocomplete="email" placeholder="you@example.com" />
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input type="password" id="password" required minlength="6"
+                   autocomplete="current-password" placeholder="At least 6 characters" />
+          </label>
+
+          <button class="btn" type="submit" id="submit-btn">Sign in</button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <button type="button" class="btn secondary" id="magic-btn">Email me a magic link</button>
+
+        <p class="fine">By continuing you agree to our Terms and Privacy Policy.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= DASHBOARD VIEW ================= -->
+  <div class="dash" id="dash-view" hidden>
+    <header class="topbar">
+      <div class="brand brand-dark"><span class="brand-dot"></span> Acme Cloud</div>
+      <div class="who">
+        <div class="avatar" id="avatar">?</div>
+        <div>
+          <div class="who-name" id="who-name">—</div>
+          <div class="who-mail" id="who-mail">—</div>
+        </div>
+        <button class="btn ghost" id="logout-btn">Sign out</button>
+      </div>
+    </header>
+
+    <main class="dash-inner">
+      <h1 id="welcome">Welcome</h1>
+      <p class="lead">You are signed in. This view is only rendered for an authenticated session.</p>
+
+      <div class="grid">
+        <div class="tile"><h3>User ID</h3><p id="t-userid">—</p></div>
+        <div class="tile"><h3>Email</h3><p id="t-email">—</p></div>
+        <div class="tile"><h3>Member since</h3><p id="t-created">—</p></div>
+        <div class="tile"><h3>Last sign-in</h3><p id="t-last">—</p></div>
+      </div>
+
+      <div class="profile-card">
+        <h3 class="eyebrow">Your profile row (from Postgres)</h3>
+        <p class="muted-line" id="profile-line">Loading…</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
